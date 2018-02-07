@@ -1,0 +1,23 @@
+pipeline {
+    agent { 
+        docker {image 'maven:3-alpine'
+    
+        }
+    }
+    
+    tools {
+        maven 'maven3' 
+    }
+    stages {
+       stage('Preparation') { 
+          steps {
+              git 'https://github.com/bronson92/maven2.git'
+          }
+       }
+       stage('Example') {
+            steps {
+              sh "mvn package"
+           }
+        }
+    }
+}
